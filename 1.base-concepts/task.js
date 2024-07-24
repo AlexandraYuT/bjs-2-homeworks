@@ -13,15 +13,9 @@ function solveEquation(a, b, c) {
 }
 
  function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-	let per = parseInt(percent) / 100 / 12; 
-	let con = parseInt(contribution);  
-	let am = parseInt(amount); 
-	let cm = parseInt(countMonths); 
-	
-	let s = am - con; 
-	let pay = s * (per + per / (((1 + per) ** cm) - 1)); 
-	let totalAmount = (pay * cm).toFixed(2);
-	console.log(totalAmount);
-	return +totalAmount;
+	let s = amount - countMonths;
+	let p = percent / 100 / 12;
+	let pay = s * (p + p / (((1 + p) ** countMonths) - 1));
+	return (pay * countMonths).toFixed(2);
   }
 
