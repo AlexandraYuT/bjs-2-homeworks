@@ -1,44 +1,49 @@
-function Student (name, gender, age) {
-    this.name = name;
-    this.gender = gender;
-    this.age = age;
+function parseCount(products) {
+  let resultParse = Number.parseFloat(products);
+  if (Number.isNaN(resultParse)) {
+    throw new Error(`Невалидное значение`);
+  }
+  return resultParse;
 }
- 
-let student1 = new Student("Екатерина", "женский", 25);
-let student2 = new Student("Никита", "мужской", 20);
- 
-Student.prototype.setSubject = function (subjectName) {
-    this.subject = subjectName;
+
+function validateCount(products) {
+  try {
+    return parseCount(products);
+  } catch(error) {
+    return error;
+  }
 }
- 
-Student.prototype.addMark = function(mark) {
-    if(this.marks === undefined){
-        this.marks = [mark];   
-    } else {
-        this.marks.push(mark);
+
+
+class Triangle {
+  constructor(sideOne, sideTwo, sideThree) {
+    if ( (sideOne + sideTwo) < sideThree || (sideTwo + sideThree) < sideOne || (sideOne + sideThree) < sideTwo) {
+      throw new Error(`Треугольник с такими сторонами не существует`);
     }
-    
+    this.sideOne = sideOne;
+    this.sideTwo = sideTwo;
+    this.sideThree = sideThree;
+  }
+  get perimeter() {
+    return +(this.sideOne + this.sideTwo + this.sideThree);
+  }
+  get area() {
+    let p = this.perimeter / 2;
+    return +( Math.sqrt(p * (p - this.sideOne) * (p - this.sideTwo) * (p - this.sideThree)) ).toFixed(3);
+  }
 }
- 
-Student.prototype.addMarks = function(...marks){
-    if(this.marks === undefined){
-        this.marks = marks;   
-    } else {
-        this.marks = this.marks.concat(marks);
-    }
-}
- 
-Student.prototype.getAverage = function(){
-    if(this.marks === undefined){
-        return 'Нет оценок';
-    } else {
-        return this.marks.reduce( ( a, v ) => a + v, 0 ) / this.marks.length;
-    }
-}
- 
- 
-Student.prototype.exclude = function(reason){
-  delete this.subject;
-  delete this.marks;
-  this.excluded = reason; 
+
+function getTriangle(sideOne, sideTwo, sideThree) {
+  try {
+    return new Triangle(sideOne, sideTwo, sideThree);
+  } catch(error) {
+      return {
+        get perimeter() {
+          return `Ошибка! Треугольник не существует`;
+        },
+        get area() {
+          return `Ошибка! Треугольник не существует`;
+        }
+      }
+  }
 }
