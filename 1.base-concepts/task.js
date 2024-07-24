@@ -11,21 +11,15 @@ function solveEquation(a, b, c) {
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-	let percent = parseInt(percent) / 100 / 12; //процентная ставка
-	let contribution = parseInt(contribution); //начальный взнос 
-	let amount = parseInt(amount); //общая стоимость
-	let countMonths = parseInt(countMonths); // срок кредита
+	let percent = parseInt(percent) / 100 / 12;
+	let contribution = parseInt(contribution);
+	let amount = parseInt(amount);
+	let countMonths = parseInt(countMonths);
 
-	if (isNaN(percent) || percent < 0) {
-		return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
-	} else if (isNaN(contribution) || contribution < 0) {
-		return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
-	} else if (isNaN(amount) || amount < 0) {
-		return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
-	} else {
-		if (isNaN(countMonths) || countMonths < 0) {
-			return `Параметр "срок ипотеки" содержит неправильное значение ${countMonths}`;
-		}
-
-	}
+	let s = am - con;
+	let pay = s * (per + per / (((1 + per) ** cm) - 1));
+	let totalAmount = (pay * cm).toFixed(2);
+	console.log(totalAmount);
+	return +totalAmount;
+}
 }
