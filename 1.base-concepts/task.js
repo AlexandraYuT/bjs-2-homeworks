@@ -13,9 +13,8 @@ function solveEquation(a, b, c) {
 }
 
  function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-	let s = amount - countMonths;
-	let p = percent / 100 / 12;
-	let pay = s * (p + p / (((1 + p) ** countMonths) - 1));
-	return (pay * countMonths).toFixed(2);
-  }
-
+	let loanBody = amount - countMonths;
+	let interestRate = percent / 100 / 12;
+	let payment = loanBody * (interestRate + (interestRate / (((1 + interestRate) ** countMonths) - 1)));
+	return (payment * countMonths).toFixed(2);
+ }
