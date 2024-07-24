@@ -14,15 +14,16 @@ function solveEquation(a, b, c) {
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-	let per = parseInt(percent) / 100 / 12;
-	let con = parseInt(contribution);
-	let am = parseInt(amount);
-	if (isNaN(per) || per < 0) {
+	let percent = parseInt(percent) / 100 / 12;
+	let contribution = parseInt(contribution);
+	let amount = parseInt(amount);
+	let countMonths = parseInt(countMonths);
+	if (isNaN(percent) || percent < 0) {
 		return `false`;
 	} else {
-		let s = am - con;
+		let s = amount - contribution;
 		let n = countMonths;
-		let pay = s * (per + per / (((1 + per) ** n) - 1));
+		let pay = s * (percent + percent / (((1 + percent) ** n) - 1));
 		let totalAmount = (pay * n).toFixed(2);
 		console.log(totalAmount);
 		return +totalAmount;
