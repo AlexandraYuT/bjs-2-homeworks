@@ -11,10 +11,10 @@ function solveEquation(a, b, c) {
 }
 
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-	let per = parseInt(percent) / 100 / 12; //процентная ставка
-	let con = parseInt(contribution); //начальный взнос 
-	let am = parseInt(amount); //общая стоимость
-	let cm = parseInt(countMonths); // срок кредита
+	let percent = parseInt(percent) / 100 / 12; //процентная ставка
+	let contribution = parseInt(contribution); //начальный взнос 
+	let amount = parseInt(amount); //общая стоимость
+	let countMonths = parseInt(countMonths); // срок кредита
 
 	if (isNaN(percent) || percent < 0) {
 		return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
