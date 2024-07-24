@@ -6,7 +6,7 @@ function solveEquation(a, b, c) {
   if (d > 0) {
     arr[0] = (-b + Math.sqrt(d)) / (2 * a);
     arr[1] = (-b - Math.sqrt(d)) / (2 * a);
-  } 
+  }
   return arr;
 }
 
@@ -16,9 +16,9 @@ function calculateTotalMortgage(percent, contribution, amount, countMonths) {
 	let am = parseInt(amount);
 	let cm = parseInt(countMonths);
 	
-	let s = am - con; 
-	let pay = s * (per + per / (((1 + per) ** cm) - 1));
-	let totalAmount = (pay * cm).toFixed(2);
-	console.log(totalAmount);
-	return +totalAmount;
+	let s = am - con;
+    	let pay = s * (per + per / (((1 + per) ** cm) - 1));
+   	let totalAmount = (pay * cm).toFixed(2);
+    	console.log(totalAmount);
+    	return +totalAmount;
 }
