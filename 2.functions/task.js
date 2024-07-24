@@ -1,133 +1,88 @@
-function getArrayParams(...arr) {
-	if (arr.length === 0) {
-		return 0;
-	}
-	let min = arr[0];
-	let max = arr[0];
-	let sum = 0;
-	let avg = 0;
-	for (i = 0; i < arr.length; i++) {
-		if (arr[i] < min) {
-			min = arr[i];
-		}
-		if (arr[i] > max) {
-			max = arr[i];
-		}
-		sum = sum + arr[i];
-		avg = sum / arr.length;
-	}
-
-	return {
-		min: min,
-		max: max,
-		avg: +(avg.toFixed(2))
-	}
+function getArrayParams(...arr) { 
+  let min = Infinity;
+  let max = -Infinity;
+  let sum = 0;
+  let avg = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum = sum + arr[i];
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+    if (arr[i] < min) {
+      min = arr[i];
+    }
+  }
+  avg = parseFloat((sum / arr.length).toFixed(2));
+  return { min: min, max: max, avg: avg };
 }
-
-getArrayParams(10, 10, 11, 20, 10);
-
 
 function summElementsWorker(...arr) {
-	if (arr.length === 0) {
-		return 0;
-	}
-
-	let sum = 0;
-
-	for (i = 0; i < arr.length; i++) {
-
-		sum += arr[i];
-	}
-
-	return sum;
-
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum = sum + arr[i];
+  }
+  return sum;
 }
-
-summElementsWorker(10, 10, 11, 20, 10);
 
 function differenceMaxMinWorker(...arr) {
-	if (arr.length === 0) {
-		return 0;
-	}
+  let  min = Infinity;
+  let  max = -Infinity;
+  let i;
 
-	let max = Math.max(...arr);
-	let min = Math.min(...arr);
-	let difference = max - min;
+  if(arr.length === 0) return 0;
 
+  for(i = 0; i < arr.length; i++) {
+    if(min > arr[i]) min = arr[i];
+    if(max < arr[i]) max = arr[i];
+  }
 
-	if (difference === -Infinity) {
-		return 0;
-	} else {
-		return difference;
-	}
+  return max - min;
 }
-
-differenceMaxMinWorker(10, 5, 16, 13, 25);
 
 function differenceEvenOddWorker(...arr) {
-	if (arr.length === 0) {
-		return 0;
-	}
+  let sumEvenElement = 0;
+  let sumOddElement = 0;
+  let i;
 
-	sumEvenElement = 0;
-	sumOddElement = 0;
+  if(arr.length === 0) return 0;
 
-	for (i = 0; i < arr.length; i++) {
+  for(i = 0; i < arr.length; i++) {
+    if((arr[i] % 2) === 0) sumEvenElement += arr[i]; else sumOddElement += arr[i];
+  }
 
-		if (arr[i] % 2 == 0) {
-			sumEvenElement += arr[i];
-		} else {
-			sumOddElement += arr[i];
-		}
-	}
-
-	return sumEvenElement - sumOddElement;
-
+  return sumEvenElement - sumOddElement;
 }
-
-differenceEvenOddWorker(61, 206, 328, 284);
 
 function averageEvenElementsWorker(...arr) {
-	if (arr.length === 0) {
-		return 0;
-	}
+  let sumEvenElement = 0;
+  let countEvenElement = 0;
+  let i;
 
-	sumEvenElement = 0;
-	countEvenElement = 0;
+  if(arr.length === 0) return 0;
 
-	for (i = 0; i < arr.length; i++) {
+  for(i = 0; i < arr.length; i++) {
+    if((arr[i] % 2) === 0) {
+      sumEvenElement += arr[i]; 
+      countEvenElement++;
+    }
+  }
 
-		if (arr[i] % 2 == 0) {
-			sumEvenElement += arr[i];
-			countEvenElement++;
-		}
-	}
-
-	return +(sumEvenElement / countEvenElement).toFixed(2);
+  return sumEvenElement / countEvenElement;
 }
 
+function makeWork (arrOfArr, func) {
+  let maxWorkerResult = -Infinity;
+  let i;
+  let res;
+  let numbers;
 
-averageEvenElementsWorker(1, 5, 6, 8);
+  if(arrOfArr.length === 0) return 0;
 
-const arr = [
-	[10, 10, 11, 20, 10],
-	[67, 10, 2, 39, 88],
-	[72, 75, 51, 87, 43],
-	[30, 41, 55, 96, 62]
-];
+  for(i = 0; i < arrOfArr.length; i++) {
+    numbers = arrOfArr[i];
+    res = func(...numbers);
+    if(res > maxWorkerResult) maxWorkerResult = res;
+  }
 
-function makeWork(arrOfArr, func) {
-	let maxWorkResult = -Infinity;
-
-	for (let i = 0; i < arrOfArr.length; i++) {
-		let max = func(...arrOfArr[i]);
-		if (maxWorkResult < max) {
-			maxWorkResult = max;
-		}
-	}
-	return maxWorkResult;
+  return maxWorkerResult;
 }
-console.log(makeWork(arr, summElementsWorker)); // максимум из 61, 206, 328, 284 => 328
-console.log(makeWork(arr, differenceMaxMinWorker)); // максимум из 10, 86, 44, 66 => 86
-console.log(makeWork(arr, differenceEvenOddWorker)); // максимум из 39, -6, -184, 92 => 92
-console.log(makeWork(arr, averageEvenElementsWorker)); // максимум из 12.5, 33.333, 72, 62.666 => 72
