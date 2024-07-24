@@ -9,24 +9,22 @@ Student.prototype.setSubject = function (subjectName) {
     this.subject = subjectName;
 }
 
-Student.prototype.addMarks = function (...marks) {
-    if(this.hasOwnProperty("marks")) {
-        this.marks = [...this.marks, ...marks];
-      }
+Student.prototype.addMarks = function(...marksToAdd) {
+	if ('marks' in this === true) {
+		this.marks.push(...marksToAdd);
+	}
 }
 
-Student.prototype.getAverage = function () {
-    if(this.hasOwnProperty("marks")) {
-        if(this.marks.length > 0) {
-           return this.marks.reduce((a, b) => a + b) / this.marks.length;
-        }
-        else return 0;
-      }
-      else return 0;
+Student.prototype.getAverage = function() {
+	if ('marks' in this === false || this.marks.length === 0) {
+		return 0
+	}
+	return this.marks.reduce((acc, item) =>
+		acc += item, 0) / this.marks.length;
 }
 
-Student.prototype.exclude = function (reason) {
-    delete this.subject;
-    delete this.marks;
-    this.excluded = reason;
+Student.prototype.exclude = function(reason) {
+	delete this.subject;
+	delete this.marks;
+	this.excluded = reason;
 }
