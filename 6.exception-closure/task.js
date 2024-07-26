@@ -1,17 +1,17 @@
-function parseCount(num) {
-	let num1 = Number.parseFloat(num);
-	if (Number.isNaN(num1)) {
-		throw new Error("Невалидное значение");
-	}
-	return parseFloat;
+﻿function parseCount (value) {
+    let parseFloat = Number.parseFloat(value);
+    if (!parseFloat) {
+        throw new Error('Невалидное значение');
+    }
+    return parseFloat;
 }
 
-function validateCount(num) {
-	try {
-		return parseCount(num);
-	} catch (err) {
-		return err;
-	}
+function validateCount (value) {
+    try {
+        return parseCount(value) 
+    } catch(error){
+    return error;
+    }
 }
 
 class Triangle {
@@ -19,7 +19,6 @@ class Triangle {
 		if (a + b < c || a + c < b || b + c < a) {
 			throw new Error('Треугольник с такими сторонами не существует');
 		}
-
 		this.a = a;
 		this.b = b;
 		this.c = c;
